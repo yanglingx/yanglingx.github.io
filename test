@@ -1,0 +1,34 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int x,y,p,a;
+bool f;
+void judge(int x,int y,int p)
+{
+    //递归深入后,一个return跳出的函数段有限,所以需要再加一个return帮助跳出函数判断
+    if(f){return;}//这个题目中体现不明显,因为return之后就在递归下边了,默认return了
+    if(x-y>y)//如果减去倍数可以自选,则他可决定自己的输赢
+    {
+        a=p;
+        f=true;
+        return;
+    }
+    if(x%y==0)//得到0的人
+    {
+        a=p;
+        f=true;
+        return;
+    }
+    judge(x,x-y,(p+1)%2);
+}
+int main()
+{
+    int m,n;
+    cin>>m>>n;
+    f=false;
+    judge(max(m,n),min(m,n),1);//假设第一个操作的人赢
+    if(a==1){cout<<"Stan win";}
+    else{cout<<"Ollie win";}
+    system("pause");
+    return 0;
+}
